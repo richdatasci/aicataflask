@@ -26,18 +26,31 @@ class CatalogueAppTests(unittest.TestCase):
         self.assertIn(b"AI PRODUCT CATALOGUE", response.data)
         self.assertIn(b"/static/js/app.js", response.data)
         self.assertIn(b"8 PRODUCTS", response.data)
+        self.assertIn(b"6 MODEL CARDS", response.data)
+        self.assertIn(b"AI model cards", response.data)
 
     def test_health_reports_product_count(self):
         response = self.client.get("/api/health")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.get_json(), {"product_count": 8, "status": "ok"})
+        self.assertEqual(
+            response.get_json(),
+            {"model_card_count": 6, "product_count": 8, "status": "ok"},
+        )
 
     def test_catalogue_api_returns_all_products(self):
         response = self.client.get("/api/catalogue")
         payload = response.get_json()
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(payload["products"]), 8)
-        self.assertIn("NLP", payload["categories"])
+        self.assertEqual(len(payload["model_cards"]), 6)
+        self.assertIn("NLP", payload["product_categories"])
+        self.assertIn("Language models", payload["model_categories"])
+
+    def test_model_cards_are_explicit_placeholders(self):
+        payload = self.client.get("/api/catalogue").get_json()
+        for model_card in payload["model_cards"]:
+            self.assertFalse(model_card["weights_available"])
+            self.assertIn("placeholder", model_card["version"].lower())
 
     def test_static_assets_are_served(self):
         stylesheet = self.client.get("/static/css/styles.css")
@@ -46,7 +59,8 @@ class CatalogueAppTests(unittest.TestCase):
             self.assertEqual(stylesheet.status_code, 200)
             self.assertEqual(script.status_code, 200)
             self.assertIn(b".product-grid", stylesheet.data)
-            self.assertIn(b"function renderProducts", script.data)
+            self.assertIn(b"function renderCatalogue", script.data)
+            self.assertIn(b"function renderModelDetails", script.data)
         finally:
             stylesheet.close()
             script.close()
