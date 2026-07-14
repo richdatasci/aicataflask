@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#0a0d15">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <meta name="clone-root" content="{{ clone_root }}">
+    <title>AI Product Catalogue</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header class="app-header">
+        <div class="brand" aria-label="AI Product Catalogue">
+            <div class="brand-mark" aria-hidden="true">AI</div>
+            <div>
+                <div class="brand-title">AI PRODUCT CATALOGUE</div>
+                <div class="brand-subtitle">Reusable accelerators for faster experimentation</div>
+            </div>
+        </div>
+        <div class="header-meta">
+            <span class="product-total">{{ products | length }} PRODUCTS</span>
+            <span class="local-status"><span class="status-dot"></span>LOCAL CATALOGUE</span>
+        </div>
+    </header>
+
+    <div class="app-shell" id="app-shell">
+        <aside class="sidebar" aria-label="Catalogue navigation">
+            <div class="sidebar-scroll">
+                <section class="sidebar-section">
+                    <p class="section-label">CATALOGUE</p>
+                    <button class="nav-button active" type="button" data-view="all">
+                        <span>All products</span>
+                    </button>
+                    <button class="nav-button" type="button" data-view="favourites">
+                        <span>Favourites</span>
+                        <span class="nav-count" id="favourite-count">0</span>
+                    </button>
+                </section>
+
+                <section class="sidebar-section filter-section">
+                    <div class="filter-heading">
+                        <p class="section-label">AI / ML TYPE</p>
+                        <button class="clear-filter" id="clear-filter" type="button" hidden>CLEAR</button>
+                    </div>
+                    <div id="category-filters" class="category-filters"></div>
+                </section>
+            </div>
+
+            <div class="adaptation-note">
+                <div class="adaptation-icon" aria-hidden="true">↗</div>
+                <div>
+                    <strong>Built for adaptation</strong>
+                    <p>Clone a starter, connect your data and focus on the use case.</p>
+                </div>
+            </div>
+        </aside>
+
+        <main class="catalogue-main" id="catalogue-main">
+            <section class="catalogue-heading">
+                <div>
+                    <p class="eyebrow">ACCELERATOR LIBRARY</p>
+                    <h1>Explore reusable AI products</h1>
+                    <p>Choose a proven starting point, then adapt it around your data and delivery constraints.</p>
+                </div>
+                <label class="search-box" for="catalogue-search">
+                    <span class="search-icon" aria-hidden="true"></span>
+                    <input
+                        id="catalogue-search"
+                        type="search"
+                        autocomplete="off"
+                        placeholder="Search products, capabilities or stack..."
+                    >
+                    <kbd>/</kbd>
+                </label>
+            </section>
+
+            <section class="feature-banner" aria-label="Catalogue guidance">
+                <div class="feature-icon" aria-hidden="true">↗</div>
+                <div>
+                    <strong>Accelerate the first 60%</strong>
+                    <p>These are adaptable foundations, not finished products. Review security, data and deployment requirements before production use.</p>
+                </div>
+            </section>
+
+            <section class="results-toolbar" aria-live="polite">
+                <div class="result-summary">
+                    <span id="result-count">LOADING PRODUCTS</span>
+                    <span id="active-filter-chip" class="active-filter-chip" hidden></span>
+                </div>
+                <button class="text-button" id="reset-results" type="button" hidden>Reset search and filters</button>
+            </section>
+
+            <section class="product-grid" id="product-grid" aria-label="AI products"></section>
+
+            <section class="empty-state" id="empty-state" hidden>
+                <div class="empty-icon" aria-hidden="true">⌕</div>
+                <h2>No matching products</h2>
+                <p>Try a different search term or clear the AI / ML filter.</p>
+                <button class="secondary-button" id="empty-reset" type="button">Clear search and filters</button>
+            </section>
+        </main>
+
+        <aside class="detail-panel" id="detail-panel" aria-label="Product details" aria-hidden="true">
+            <div class="detail-header">
+                <span class="section-label">PRODUCT DETAILS</span>
+                <button class="icon-button close-detail" id="close-detail" type="button" aria-label="Close product details">×</button>
+            </div>
+            <div class="detail-scroll" id="detail-content"></div>
+        </aside>
+    </div>
+
+    <dialog class="clone-dialog" id="clone-dialog" aria-labelledby="clone-title">
+        <form method="dialog" class="dialog-shell">
+            <div class="dialog-topline">
+                <span class="section-label">GET PRODUCT</span>
+                <button class="icon-button" value="cancel" aria-label="Close clone dialog">×</button>
+            </div>
+            <div class="dialog-product">
+                <div class="product-icon large" id="clone-icon"></div>
+                <div>
+                    <h2 id="clone-title"></h2>
+                    <p id="clone-strapline"></p>
+                </div>
+            </div>
+
+            <div class="destination-card">
+                <span class="section-label">LOCAL CLONE DESTINATION</span>
+                <code id="clone-target"></code>
+                <p>The destination is controlled by the local app configuration.</p>
+            </div>
+
+            <div class="dialog-guidance">
+                <strong>Choose how to get the project</strong>
+                <p>Clone creates a shallow Git repository. Download ZIP works without Git.</p>
+            </div>
+
+            <div class="dialog-actions">
+                <a class="secondary-button full-button" id="download-zip" href="#" target="_blank" rel="noreferrer">
+                    Download ZIP
+                </a>
+                <button class="primary-button full-button" id="confirm-clone" type="button">
+                    Clone repository locally
+                </button>
+            </div>
+            <p class="dialog-status" id="clone-status" aria-live="polite"></p>
+        </form>
+    </dialog>
+
+    <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</body>
+</html>
