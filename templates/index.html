@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="header-meta">
-            <span class="product-total">{{ products | length }} PRODUCTS</span>
+            <span class="product-total">{{ products | length }} PRODUCTS · {{ model_cards | length }} MODEL CARDS</span>
             <span class="local-status"><span class="status-dot"></span>LOCAL CATALOGUE</span>
         </div>
     </header>
@@ -30,10 +30,15 @@
             <div class="sidebar-scroll">
                 <section class="sidebar-section">
                     <p class="section-label">CATALOGUE</p>
-                    <button class="nav-button active" type="button" data-view="all">
-                        <span>All products</span>
+                    <button class="nav-button active" type="button" data-section="products">
+                        <span>Ready-to-use products</span>
+                        <span class="nav-count">{{ products | length }}</span>
                     </button>
-                    <button class="nav-button" type="button" data-view="favourites">
+                    <button class="nav-button" type="button" data-section="models">
+                        <span>AI model cards</span>
+                        <span class="nav-count">{{ model_cards | length }}</span>
+                    </button>
+                    <button class="nav-button sub-navigation" type="button" data-view="favourites">
                         <span>Favourites</span>
                         <span class="nav-count" id="favourite-count">0</span>
                     </button>
@@ -41,7 +46,7 @@
 
                 <section class="sidebar-section filter-section">
                     <div class="filter-heading">
-                        <p class="section-label">AI / ML TYPE</p>
+                        <p class="section-label" id="filter-section-label">AI / ML TYPE</p>
                         <button class="clear-filter" id="clear-filter" type="button" hidden>CLEAR</button>
                     </div>
                     <div id="category-filters" class="category-filters"></div>
@@ -51,8 +56,8 @@
             <div class="adaptation-note">
                 <div class="adaptation-icon" aria-hidden="true">↗</div>
                 <div>
-                    <strong>Built for adaptation</strong>
-                    <p>Clone a starter, connect your data and focus on the use case.</p>
+                    <strong id="sidebar-note-title">Built for adaptation</strong>
+                    <p id="sidebar-note-copy">Clone a starter, connect your data and focus on the use case.</p>
                 </div>
             </div>
         </aside>
@@ -60,9 +65,9 @@
         <main class="catalogue-main" id="catalogue-main">
             <section class="catalogue-heading">
                 <div>
-                    <p class="eyebrow">ACCELERATOR LIBRARY</p>
-                    <h1>Explore reusable AI products</h1>
-                    <p>Choose a proven starting point, then adapt it around your data and delivery constraints.</p>
+                    <p class="eyebrow" id="catalogue-eyebrow">ACCELERATOR LIBRARY</p>
+                    <h1 id="catalogue-title">Explore reusable AI products</h1>
+                    <p id="catalogue-subtitle">Choose a proven starting point, then adapt it around your data and delivery constraints.</p>
                 </div>
                 <label class="search-box" for="catalogue-search">
                     <span class="search-icon" aria-hidden="true"></span>
@@ -79,8 +84,8 @@
             <section class="feature-banner" aria-label="Catalogue guidance">
                 <div class="feature-icon" aria-hidden="true">↗</div>
                 <div>
-                    <strong>Accelerate the first 60%</strong>
-                    <p>These are adaptable foundations, not finished products. Review security, data and deployment requirements before production use.</p>
+                    <strong id="feature-title">Accelerate the first 60%</strong>
+                    <p id="feature-copy">These are adaptable foundations, not finished products. Review security, data and deployment requirements before production use.</p>
                 </div>
             </section>
 
@@ -92,19 +97,19 @@
                 <button class="text-button" id="reset-results" type="button" hidden>Reset search and filters</button>
             </section>
 
-            <section class="product-grid" id="product-grid" aria-label="AI products"></section>
+            <section class="product-grid" id="product-grid" aria-label="Ready-to-use AI products"></section>
 
             <section class="empty-state" id="empty-state" hidden>
                 <div class="empty-icon" aria-hidden="true">⌕</div>
-                <h2>No matching products</h2>
-                <p>Try a different search term or clear the AI / ML filter.</p>
+                <h2 id="empty-title">No matching products</h2>
+                <p id="empty-copy">Try a different search term or clear the AI / ML filter.</p>
                 <button class="secondary-button" id="empty-reset" type="button">Clear search and filters</button>
             </section>
         </main>
 
         <aside class="detail-panel" id="detail-panel" aria-label="Product details" aria-hidden="true">
             <div class="detail-header">
-                <span class="section-label">PRODUCT DETAILS</span>
+                <span class="section-label" id="detail-section-label">PRODUCT DETAILS</span>
                 <button class="icon-button close-detail" id="close-detail" type="button" aria-label="Close product details">×</button>
             </div>
             <div class="detail-scroll" id="detail-content"></div>
@@ -145,6 +150,42 @@
                 </button>
             </div>
             <p class="dialog-status" id="clone-status" aria-live="polite"></p>
+        </form>
+    </dialog>
+
+    <dialog class="weights-dialog" id="weights-dialog" aria-labelledby="weights-title">
+        <form method="dialog" class="dialog-shell weights-shell">
+            <div class="dialog-topline">
+                <span class="section-label">MODEL WEIGHTS</span>
+                <button class="icon-button" value="cancel" aria-label="Close model weights placeholder">×</button>
+            </div>
+
+            <div class="dialog-product">
+                <div class="product-icon large" id="weights-icon"></div>
+                <div>
+                    <h2 id="weights-title"></h2>
+                    <p id="weights-strapline"></p>
+                </div>
+            </div>
+
+            <div class="placeholder-banner">
+                <span class="placeholder-symbol" aria-hidden="true">◇</span>
+                <div>
+                    <strong>Demo placeholder</strong>
+                    <p>No model binary or external model link is attached to this proof of concept.</p>
+                </div>
+            </div>
+
+            <section class="package-preview" aria-label="Illustrative model package">
+                <span class="section-label">ILLUSTRATIVE PACKAGE CONTENTS</span>
+                <div class="package-row"><span>Model configuration</span><code>config.json</code></div>
+                <div class="package-row"><span>Model card</span><code>MODEL_CARD.md</code></div>
+                <div class="package-row"><span>Fine-tuning configuration</span><code>finetune_config.yaml</code></div>
+                <div class="package-row unavailable"><span>Model weights</span><code id="weights-filename">model.safetensors</code></div>
+            </section>
+
+            <p class="weights-guidance">In a governed catalogue, this action would provide approved weights, checksums, licence terms, version history and validation evidence.</p>
+            <button class="secondary-button full-button" value="cancel">Close placeholder</button>
         </form>
     </dialog>
 
