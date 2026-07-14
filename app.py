@@ -13,7 +13,7 @@ from typing import Optional
 
 from flask import Flask, jsonify, render_template, request
 
-from catalogue import CATEGORIES, PRODUCTS, PRODUCTS_BY_ID
+from catalogue import CATEGORIES, MODEL_CARDS, MODEL_CATEGORIES, PRODUCTS, PRODUCTS_BY_ID
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -63,6 +63,7 @@ def create_app(test_config: Optional[dict] = None) -> Flask:
         return render_template(
             "index.html",
             products=PRODUCTS,
+            model_cards=MODEL_CARDS,
             categories=CATEGORIES,
             clone_root=str(clone_root),
             csrf_token=app.config["CSRF_TOKEN"],
@@ -70,11 +71,20 @@ def create_app(test_config: Optional[dict] = None) -> Flask:
 
     @app.get("/api/health")
     def health():
-        return jsonify(status="ok", product_count=len(PRODUCTS))
+        return jsonify(
+            status="ok",
+            product_count=len(PRODUCTS),
+            model_card_count=len(MODEL_CARDS),
+        )
 
     @app.get("/api/catalogue")
     def catalogue():
-        return jsonify(products=PRODUCTS, categories=CATEGORIES)
+        return jsonify(
+            products=PRODUCTS,
+            product_categories=CATEGORIES,
+            model_cards=MODEL_CARDS,
+            model_categories=MODEL_CATEGORIES,
+        )
 
     @app.post("/api/clone")
     def clone_product():

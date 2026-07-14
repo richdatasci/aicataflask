@@ -5,7 +5,7 @@
 | Field | Value |
 | --- | --- |
 | Status | POC implementation baseline |
-| Version | 1.0 |
+| Version | 1.1 |
 | Date | 14 July 2026 |
 | Application type | Local Flask web application |
 | Primary target | Managed Windows workstations |
@@ -23,13 +23,15 @@ The POC shall provide:
 - A local Flask server started from PowerShell, Command Prompt or a batch file.
 - Automatic opening in the user's default browser.
 - The eight agreed catalogue products.
+- A separate component catalogue containing six illustrative AI model cards.
+- An explicit placeholder experience for model-weight selection and download.
 - Search, AI and ML filtering and favourites.
 - Detailed product metadata and readiness labels.
 - Repository navigation, ZIP downloads and optional Git cloning.
 - No Node.js, Streamlit, Rust or frontend compilation requirement.
 - No application database, account system or telemetry.
 
-Authentication, private repositories, enterprise administration, central hosting and automated product execution are outside the POC scope.
+Authentication, private repositories, enterprise administration, central hosting, automated product execution and distribution of real model binaries are outside the POC scope.
 
 ## 3. Business requirements
 
@@ -40,6 +42,7 @@ Authentication, private repositories, enterprise administration, central hosting
 | BR-003 | Support rapid local experimentation on restricted workstations. | Must |
 | BR-004 | Explain suitability and readiness in accessible language. | Must |
 | BR-005 | Avoid representing catalogue inclusion as production approval. | Must |
+| BR-006 | Show how governed model components could be discovered and selected for fine-tuning. | Must |
 
 ## 4. Functional requirements
 
@@ -108,6 +111,20 @@ Authentication, private repositories, enterprise administration, central hosting
 | FR-058 | Clone requests shall use a same-origin request token. | Requests without the current token are rejected. | Must |
 | FR-059 | Clone operations shall have a timeout. | A stalled command ends after five minutes. | Must |
 
+### 4.7 AI model components
+
+| ID | Requirement | Acceptance criteria | Priority |
+| --- | --- | --- | --- |
+| FR-060 | AI model components shall appear in a section separate from ready-to-use products. | The sidebar provides distinct product and AI Model Cards navigation. | Must |
+| FR-061 | The POC shall include illustrative model cards across multiple task types. | Six model cards cover language, embeddings, vision, forecasting, multimodal document processing and retrieval. | Must |
+| FR-062 | Model cards shall support search and model-type filtering. | Search and category controls operate only on the selected model-card collection. | Must |
+| FR-063 | Each model card shall show its title, purpose, category, parameter count and planned weight format. | The user can compare model components from the grid. | Must |
+| FR-064 | Model details shall show tasks, intended uses, inputs, outputs, fine-tuning options, limitations, licence and version. | The selected card displays every configured field. | Must |
+| FR-065 | A model-weight action shall be available from model details. | Selecting Download model weights opens the package placeholder. | Must |
+| FR-066 | The model-weight experience shall be explicitly marked as illustrative. | The interface states that no model binary or external model link is attached. | Must |
+| FR-067 | The package placeholder shall indicate the metadata expected in a governed distribution. | Configuration, model card, fine-tuning configuration, checksum, licence and validation expectations are explained. | Should |
+| FR-068 | Placeholder model entries shall not expose a functional binary download. | No model-weight URL or binary download endpoint is present. | Must |
+
 ## 5. User experience requirements
 
 | ID | Requirement | Priority |
@@ -119,6 +136,8 @@ Authentication, private repositories, enterprise administration, central hosting
 | UX-005 | Essential meaning shall not be communicated by colour alone. | Must |
 | UX-006 | Reduced-motion browser preferences shall be respected. | Should |
 | UX-007 | Clone status and errors shall be communicated without blocking the page. | Must |
+| UX-008 | Product and model-component areas shall remain visually related but clearly distinct. | Must |
+| UX-009 | Placeholder status shall be conveyed with text as well as styling. | Must |
 
 ## 6. Security and privacy requirements
 
@@ -133,6 +152,7 @@ Authentication, private repositories, enterprise administration, central hosting
 | SEC-007 | The application shall refuse to overwrite clone targets. | Must |
 | SEC-008 | Catalogue inclusion shall not imply production approval. | Must |
 | SEC-009 | Jinja automatic escaping shall remain enabled. | Must |
+| SEC-010 | Placeholder model cards shall not imply ownership, approval, benchmark performance or licence rights for a real model. | Must |
 
 ## 7. Technical requirements
 
@@ -167,6 +187,7 @@ The automated suite shall verify:
 - Index rendering and baseline products.
 - Health endpoint and product count.
 - Catalogue API content.
+- Model-card count, categories and explicit placeholder status.
 - Rejection of missing clone request tokens.
 - Rejection of unknown product IDs.
 
@@ -177,6 +198,7 @@ Manual acceptance shall verify:
 - All product filters and search terms.
 - Persistent favourites after refresh.
 - Product details and responsive layouts.
+- Model-card navigation, search, filters, details and placeholder package dialog.
 - Repository navigation, clipboard copying and ZIP downloads.
 - Successful clone when Git is available.
 - Safe errors for missing Git and existing targets.
@@ -189,9 +211,10 @@ The POC is complete when:
 - It starts using the documented Python commands.
 - The browser opens automatically on the loopback address.
 - All eight products and current metadata are present.
+- All six illustrative model cards are present in a separate section.
 - Search, filtering, favourites and details operate correctly.
+- The model-weights action opens an explicit placeholder and never supplies a fake download.
 - Direct repository and ZIP actions work.
 - Clone behaviour is safe and errors are handled.
 - Automated tests pass.
 - The complete project contains setup instructions and this specification.
-

@@ -1,12 +1,15 @@
 # AI Product Catalogue, Flask Edition
 
-A polished local Flask application for discovering, filtering and obtaining reusable AI and machine-learning project foundations.
+A polished local Flask application for discovering reusable AI products and exploring illustrative AI model components for fine-tuning workflows.
 
 It runs from PowerShell and opens in the default browser. It does not require Rust, Node.js, Streamlit, Visual Studio or Microsoft C++ Build Tools.
 
 ## Included experience
 
 - Eight preconfigured AI and ML products
+- A separate AI Model Cards section with six illustrative model components
+- Model task, input, output, limitation, licence and fine-tuning metadata
+- An explicit model-weights package placeholder with no fake binary or external link
 - Professional responsive dark interface
 - Live search across product metadata
 - AI and ML type filters with counts
@@ -116,7 +119,7 @@ ai-product-catalogue-flask/
 
 ## Catalogue updates
 
-Edit `catalogue.py` to add or update products. Every product contains:
+Edit `catalogue.py` to add or update ready-to-use products and model cards. Every product contains:
 
 - Stable ID
 - Title and visual short name
@@ -129,7 +132,17 @@ Edit `catalogue.py` to add or update products. Every product contains:
 - Repository URL, clone URL and default branch
 - Interface accent colour
 
+Every illustrative model card contains:
+
+- Stable ID, title and visual short name
+- Model category, supported tasks and intended uses
+- Illustrative parameter count, inputs and outputs
+- Fine-tuning options and planned weight formats
+- Limitations, licence placeholder and version
+- Explicit weight-availability status
+
+The current model-card entries are generated examples for demonstrating the interface. Selecting Download model weights opens an illustrative package preview. It does not download a binary or imply that an approved model exists.
+
 ## POC boundary
 
-Catalogue inclusion does not mean a repository is approved for production or sensitive data. Review licensing, dependencies, security, data handling, model risks, accessibility and deployment architecture before using any accelerator with client data.
-
+Catalogue inclusion does not mean a repository or model is approved for production or sensitive data. Review licensing, dependencies, security, data handling, model risks, accessibility and deployment architecture before using any accelerator or model component with client data.

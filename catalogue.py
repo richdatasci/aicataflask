@@ -234,3 +234,199 @@ PRODUCTS = [
 PRODUCTS_BY_ID = {product["id"]: product for product in PRODUCTS}
 CATEGORIES = sorted({category for product in PRODUCTS for category in product["categories"]})
 
+
+# These model cards are deliberately illustrative. They demonstrate the governed
+# metadata and download experience without claiming that model weights exist.
+MODEL_CARDS = [
+    {
+        "id": "enterprise-language-model-7b",
+        "title": "Enterprise Language Model 7B",
+        "short_name": "LLM",
+        "strapline": "Adaptable text generation and reasoning component",
+        "summary": (
+            "An illustrative language-model component for demonstrating how teams could "
+            "compare intended use, fine-tuning options, limitations and downloadable weights."
+        ),
+        "categories": ["Language models"],
+        "tasks": ["Question answering", "Summarisation", "Instruction following"],
+        "parameter_count": "7B",
+        "input_profile": "Text, illustrative 8K-token context",
+        "output_profile": "Generated text",
+        "weight_formats": ["SafeTensors", "GGUF"],
+        "fine_tuning": ["LoRA", "QLoRA", "Supervised fine-tuning"],
+        "intended_uses": [
+            "Domain-specific assistants",
+            "Controlled document summarisation",
+            "Instruction-following experiments",
+        ],
+        "limitations": [
+            "No real model or benchmark is attached to this POC entry.",
+            "Production use would require safety, bias and domain evaluation.",
+            "Generated answers would require grounding and verification controls.",
+        ],
+        "licence": "To be confirmed by catalogue owner",
+        "version": "Demo placeholder 1.0",
+        "weights_available": False,
+        "accent": "#7c72ff",
+    },
+    {
+        "id": "semantic-embedding-model",
+        "title": "Semantic Embedding Model",
+        "short_name": "EMB",
+        "strapline": "Dense representations for search and retrieval",
+        "summary": (
+            "An illustrative embedding component for semantic search, clustering and "
+            "retrieval experiments over organisation-specific text."
+        ),
+        "categories": ["Embeddings"],
+        "tasks": ["Semantic search", "Clustering", "Retrieval"],
+        "parameter_count": "335M",
+        "input_profile": "Text, illustrative 512-token input",
+        "output_profile": "1024-dimensional vector",
+        "weight_formats": ["SafeTensors", "ONNX"],
+        "fine_tuning": ["Contrastive learning", "Domain-pair tuning", "Hard-negative mining"],
+        "intended_uses": [
+            "Vector-search prototypes",
+            "Document similarity",
+            "Domain-specific retrieval evaluation",
+        ],
+        "limitations": [
+            "No real embedding model or evaluation score is attached.",
+            "Vector quality would need testing on representative domain queries.",
+            "Embedding storage and source permissions require separate design."
+        ],
+        "licence": "To be confirmed by catalogue owner",
+        "version": "Demo placeholder 1.0",
+        "weights_available": False,
+        "accent": "#22aeff",
+    },
+    {
+        "id": "vision-encoder-base",
+        "title": "Vision Encoder Base",
+        "short_name": "VIS",
+        "strapline": "Reusable visual feature and classification backbone",
+        "summary": (
+            "An illustrative vision component that could be fine-tuned for image "
+            "classification, visual similarity or domain-specific feature extraction."
+        ),
+        "categories": ["Computer vision"],
+        "tasks": ["Image classification", "Feature extraction", "Visual similarity"],
+        "parameter_count": "300M",
+        "input_profile": "RGB image, illustrative 224 by 224 pixels",
+        "output_profile": "Class scores or visual embeddings",
+        "weight_formats": ["SafeTensors", "ONNX"],
+        "fine_tuning": ["Linear probing", "Full fine-tuning", "Adapter tuning"],
+        "intended_uses": [
+            "Domain image classification",
+            "Visual quality inspection",
+            "Image-similarity experiments",
+        ],
+        "limitations": [
+            "No real image encoder, training dataset or benchmark is attached.",
+            "Performance may vary substantially across image domains.",
+            "Representative data and class-balance assessment would be required."
+        ],
+        "licence": "To be confirmed by catalogue owner",
+        "version": "Demo placeholder 1.0",
+        "weights_available": False,
+        "accent": "#ff5b89",
+    },
+    {
+        "id": "time-series-foundation-model",
+        "title": "Time-Series Foundation Model",
+        "short_name": "TSF",
+        "strapline": "General forecasting component for sequential data",
+        "summary": (
+            "An illustrative forecasting component for demonstrating zero-shot baselines "
+            "and fine-tuning against operational time-series data."
+        ),
+        "categories": ["Forecasting"],
+        "tasks": ["Forecasting", "Anomaly detection", "Representation learning"],
+        "parameter_count": "200M",
+        "input_profile": "Numeric sequences, illustrative 512-step context",
+        "output_profile": "Point or probabilistic forecasts",
+        "weight_formats": ["SafeTensors", "ONNX"],
+        "fine_tuning": ["Full fine-tuning", "Linear head", "Domain adaptation"],
+        "intended_uses": [
+            "Demand forecasting experiments",
+            "Sensor-data baselines",
+            "Operational anomaly exploration",
+        ],
+        "limitations": [
+            "No real model, training data or forecast benchmark is attached.",
+            "Seasonality, missing values and data leakage require use-case testing.",
+            "Forecast uncertainty would need explicit evaluation."
+        ],
+        "licence": "To be confirmed by catalogue owner",
+        "version": "Demo placeholder 1.0",
+        "weights_available": False,
+        "accent": "#f4ab41",
+    },
+    {
+        "id": "document-vision-language-model",
+        "title": "Document Vision-Language Model",
+        "short_name": "VLM",
+        "strapline": "Multimodal understanding for complex documents",
+        "summary": (
+            "An illustrative multimodal component for scanned documents, diagrams, "
+            "forms and document question-answering experiments."
+        ),
+        "categories": ["Multimodal", "OCR"],
+        "tasks": ["Document understanding", "OCR", "Visual question answering"],
+        "parameter_count": "3B",
+        "input_profile": "Image or document page with text prompt",
+        "output_profile": "Extracted or generated text",
+        "weight_formats": ["SafeTensors", "GGUF"],
+        "fine_tuning": ["LoRA", "Instruction tuning", "Document-layout adaptation"],
+        "intended_uses": [
+            "Form and table extraction experiments",
+            "Diagram understanding",
+            "Scanned-document question answering",
+        ],
+        "limitations": [
+            "No real multimodal model or OCR benchmark is attached.",
+            "Small text, complex layouts and handwriting may reduce accuracy.",
+            "Sensitive documents would require controlled local processing."
+        ],
+        "licence": "To be confirmed by catalogue owner",
+        "version": "Demo placeholder 1.0",
+        "weights_available": False,
+        "accent": "#26c6da",
+    },
+    {
+        "id": "cross-encoder-reranker",
+        "title": "Cross-Encoder Reranker",
+        "short_name": "RER",
+        "strapline": "Relevance scoring for higher-quality retrieval",
+        "summary": (
+            "An illustrative reranking component for improving the ordering of search, "
+            "RAG and evidence-retrieval results."
+        ),
+        "categories": ["Retrieval"],
+        "tasks": ["Reranking", "Relevance scoring", "Retrieval evaluation"],
+        "parameter_count": "110M",
+        "input_profile": "Query and candidate passage pair",
+        "output_profile": "Relevance score",
+        "weight_formats": ["SafeTensors", "ONNX"],
+        "fine_tuning": ["Pairwise ranking", "Hard-negative tuning", "Domain relevance tuning"],
+        "intended_uses": [
+            "RAG retrieval improvement",
+            "Search result reranking",
+            "Evidence-prioritisation experiments",
+        ],
+        "limitations": [
+            "No real reranker or relevance benchmark is attached.",
+            "Cross-encoding increases latency for large candidate sets.",
+            "Domain-specific relevance labels would be required for validation."
+        ],
+        "licence": "To be confirmed by catalogue owner",
+        "version": "Demo placeholder 1.0",
+        "weights_available": False,
+        "accent": "#b16cff",
+    },
+]
+
+MODEL_CARDS_BY_ID = {model["id"]: model for model in MODEL_CARDS}
+MODEL_CATEGORIES = sorted(
+    {category for model in MODEL_CARDS for category in model["categories"]}
+)
