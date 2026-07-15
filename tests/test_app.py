@@ -52,6 +52,18 @@ class CatalogueAppTests(unittest.TestCase):
             self.assertFalse(model_card["weights_available"])
             self.assertIn("placeholder", model_card["version"].lower())
 
+    def test_3d_path_finding_has_live_demo_url(self):
+        payload = self.client.get("/api/catalogue").get_json()
+        path_finding = next(
+            product
+            for product in payload["products"]
+            if product["id"] == "3d-path-finding"
+        )
+        self.assertEqual(
+            path_finding["demo_url"],
+            "https://3dpathfindingrichgreg.streamlit.app/",
+        )
+
     def test_static_assets_are_served(self):
         stylesheet = self.client.get("/static/css/styles.css")
         script = self.client.get("/static/js/app.js")
@@ -61,6 +73,7 @@ class CatalogueAppTests(unittest.TestCase):
             self.assertIn(b".product-grid", stylesheet.data)
             self.assertIn(b"function renderCatalogue", script.data)
             self.assertIn(b"function renderModelDetails", script.data)
+            self.assertIn(b'"Demo Product"', script.data)
         finally:
             stylesheet.close()
             script.close()
