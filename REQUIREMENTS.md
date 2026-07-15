@@ -95,6 +95,7 @@ Authentication, private repositories, enterprise administration, central hosting
 | FR-041 | The repository shall open in a new browser tab. | The configured GitHub URL is used. | Must |
 | FR-042 | The repository URL shall be copyable. | The exact URL is written to the clipboard. | Should |
 | FR-043 | A ZIP download action shall work without Git. | The browser opens the configured branch archive. | Must |
+| FR-044 | A configured live product demonstration shall be accessible from product details. | 3D Path Finding displays Demo Product above Get product and opens the configured Streamlit URL in a new tab. | Must |
 
 ### 4.6 Clone workflow
 

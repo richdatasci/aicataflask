@@ -16,6 +16,7 @@ It runs from PowerShell and opens in the default browser. It does not require Ru
 - Persistent browser favourites
 - Product readiness, capabilities, expected data and technology details
 - Direct GitHub links and copy-to-clipboard
+- A live Demo Product link for 3D Path Finding
 - Download ZIP option that does not require Git
 - Optional safe local Git clone
 - Automatic browser launch
@@ -130,6 +131,7 @@ Edit `catalogue.py` to add or update ready-to-use products and model cards. Ever
 - Technology stack
 - Readiness and explanation
 - Repository URL, clone URL and default branch
+- Optional live demonstration URL
 - Interface accent colour
 
 Every illustrative model card contains:

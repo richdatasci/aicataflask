@@ -55,6 +55,7 @@ PRODUCTS = [
         ),
         "repo_url": "https://github.com/richdatasci/3dpathfinding",
         "clone_url": "https://github.com/richdatasci/3dpathfinding.git",
+        "demo_url": "https://3dpathfindingrichgreg.streamlit.app/",
         "default_branch": "main",
         "accent": "#00c9a7",
     },
