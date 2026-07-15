@@ -968,6 +968,16 @@ input:focus-visible {
     background: #7970ff;
 }
 
+.demo-button {
+    border-color: color-mix(in srgb, var(--accent) 68%, white);
+    background: color-mix(in srgb, var(--accent) 78%, #111622);
+    box-shadow: 0 8px 22px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.demo-button:hover {
+    background: color-mix(in srgb, var(--accent) 88%, white);
+}
+
 .primary-button:disabled {
     transform: none;
     opacity: 0.55;
