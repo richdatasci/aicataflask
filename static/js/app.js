@@ -434,6 +434,19 @@ function renderProductDetails(product) {
     content.append(sourceSection);
 
     const actions = createElement("div", "detail-actions");
+    if (product.demo_url) {
+        const demoProduct = createElement("a", "primary-button demo-button", "Demo Product");
+        demoProduct.href = product.demo_url;
+        demoProduct.target = "_blank";
+        demoProduct.rel = "noopener noreferrer";
+        demoProduct.setAttribute(
+            "aria-label",
+            `Open ${product.title} demo in a new tab`,
+        );
+        demoProduct.style.setProperty("--accent", product.accent);
+        actions.append(demoProduct);
+    }
+
     const getProduct = createElement("button", "primary-button", "Get product");
     getProduct.type = "button";
     getProduct.addEventListener("click", () => openCloneDialog(product));
